@@ -1,0 +1,32 @@
+msgid "welcome"
+msgstr "مرحبًا! الرجاء اختيار لغتك المفضلة."
+
+msgid "enter_company_name"
+msgstr "يرجى إدخال اسم شركتك."
+
+msgid "enter_company_country"
+msgstr "ما هي الدولة أو الدول التي تتواجد فيها شركتك؟"
+
+msgid "enter_company_industry"
+msgstr "ما هو القطاع أو القطاعات التي تعمل فيها شركتك بشكل أساسي؟"
+
+msgid "enter_company_contact"
+msgstr "يرجى إدخال طرق التواصل مع شركتك، مثل رقم الهاتف أو البريد الإلكتروني أو حسابات وسائل التواصل الاجتماعي أو الموقع الإلكتروني."
+
+msgid "info_sent_successfully"
+msgstr "شكرًا لك! تم إرسال معلوماتك بنجاح."
+
+msgid "english"
+msgstr "الإنجليزية"
+
+msgid "persian"
+msgstr "الفارسية"
+
+msgid "chinese"
+msgstr "الصينية"
+
+msgid "arabic"
+msgstr "العربية"
+
+msgid ""
+msgstr ""

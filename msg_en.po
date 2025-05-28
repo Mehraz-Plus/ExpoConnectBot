@@ -16,5 +16,17 @@ msgstr "Please enter the ways to contact your company, such as phone number, ema
 msgid "info_sent_successfully"
 msgstr "Thank you! Your info has been successfully submitted."
 
+msgid "english"
+msgstr "English"
+
+msgid "persian"
+msgstr "Persian"
+
+msgid "chinese"
+msgstr "Chinese"
+
+msgid "arabic"
+msgstr "Arabic"
+
 msgid ""
 msgstr ""

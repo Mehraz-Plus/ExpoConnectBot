@@ -1,0 +1,32 @@
+msgid "welcome"
+msgstr "你好！欢迎！请选择你偏好的语言。"
+
+msgid "enter_company_name"
+msgstr "请输入您公司的名称。"
+
+msgid "enter_company_country"
+msgstr "贵公司位于哪个国家或哪些国家？"
+
+msgid "enter_company_industry"
+msgstr "贵公司主要从事哪些行业？"
+
+msgid "enter_company_contact"
+msgstr "请输入与您公司联系的方式，例如电话号码、电子邮件、社交媒体账号或网站。"
+
+msgid "info_sent_successfully"
+msgstr "谢谢！您的信息已成功提交。"
+
+msgid "english"
+msgstr "英语"
+
+msgid "persian"
+msgstr "波斯语"
+
+msgid "chinese"
+msgstr "中文"
+
+msgid "arabic"
+msgstr "阿拉伯语"
+
+msgid ""
+msgstr ""

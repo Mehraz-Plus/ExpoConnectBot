@@ -16,5 +16,17 @@ msgstr "راه‌های تماس به شرکت خود، نظیر شماره تم
 msgid "info_sent_successfully"
 msgstr "متشکریم! اطلاعات شما با موفقیت ثبت شد."
 
+msgid "english"
+msgstr "انگلیسی"
+
+msgid "persian"
+msgstr "فارسی"
+
+msgid "chinese"
+msgstr "چینی"
+
+msgid "arabic"
+msgstr "عربی"
+
 msgid ""
 msgstr ""
