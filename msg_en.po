@@ -1,0 +1,20 @@
+msgid "welcome"
+msgstr "Hello! Welcome! Please select your preferred language."
+
+msgid "enter_company_name"
+msgstr "Please enter your company's name."
+
+msgid "enter_company_country"
+msgstr "Which country/countries your company is based in?"
+
+msgid "enter_company_industry"
+msgstr "In which industry/industries does your company primarily operate?"
+
+msgid "enter_company_contact"
+msgstr "Please enter the ways to contact your company, such as phone number, email, social media handles, or website."
+
+msgid "info_sent_successfully"
+msgstr "Thank you! Your info has been successfully submitted."
+
+msgid ""
+msgstr ""

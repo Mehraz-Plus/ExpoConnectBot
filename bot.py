@@ -1,8 +1,9 @@
 from telethon import TelegramClient, events
 from telethon.tl.types import PeerUser
+from telethon import Button
 from env import env
 from mongo import Mongo
-import polib
+import lang
 import os
 
 # Environment detection
@@ -15,11 +16,6 @@ elif env == 'dev':
 else:
     import config_test
     config = config_test
-
-# Load message file
-msg = {}
-for entry in polib.pofile('msg_' + config.language + '.po'):
-    msg[entry.msgid] = entry.msgstr
 
 # Connect to database
 db = Mongo(config.db_host, config.db_port, config.db_name)
@@ -34,36 +30,62 @@ else:
 
 @bot.on(events.NewMessage(pattern='/start', incoming=True))
 async def start(event):
-    welcome_msg = f"{msg.get('welcome')}.\n\n{msg.get('info')}.\n\n{msg.get('ready_to_receive')}"
-    await event.respond(welcome_msg)
+    welcome_msg = f"{lang.get('welcome', 'en')}\n\n{lang.get('welcome', 'fa')}\n\n{lang.get('welcome', 'cn')}\n\n{lang.get('welcome', 'ar')}"
+    welcome_btns = []
+    welcome_btns.append([Button.inline(lang.get('english'), b'select_english')])
+    welcome_btns.append([Button.inline(lang.get('persian'), b'select_persian')])
+    welcome_btns.append([Button.inline(lang.get('chinese'), b'select_chinese')])
+    welcome_btns.append([Button.inline(lang.get('arabic'), b'select_arabic')])
+    await event.respond(welcome_msg, buttons=welcome_btns)
     raise events.StopPropagation
 
 
-@bot.on(events.NewMessage(incoming=True))
-async def forward_to_admin(event):
-    try:
-        for admin in config.admin_list:
-            await bot.forward_messages(admin, event.message)
-        await event.respond(f"{msg.get('thanks')}! {msg.get('sent_successfully')}.")
-    except Exception as e:
-        print(f"Failed to forward message: {e}")
+@bot.on(events.CallbackQuery(pattern=b'select_english'))
+async def select_english(event):
+    db.insert('language', {'user_id': event.sender_id, 'language': 'en'})
+    await main_conv(event, 'en')
     raise events.StopPropagation
 
+@bot.on(events.CallbackQuery(pattern=b'select_persian'))
+async def select_persian(event):
+    db.insert('language', {'user_id': event.sender_id, 'language': 'fa'})
+    await main_conv(event, 'fa')
+    raise events.StopPropagation
 
-#@bot.on(events.NewMessage(func=lambda e: e.media))
-async def handle_media(event):
-    try:
-        sender = await event.get_sender()
-        name = sender.username or sender.id
+@bot.on(events.CallbackQuery(pattern=b'select_chinese'))
+async def select_chinese(event):
+    db.insert('language', {'user_id': event.sender_id, 'language': 'cn'})
+    await main_conv(event, 'cn')
+    raise events.StopPropagation
 
-        # Generate file path
-        file_path = os.path.join('DOWNLOAD_DIR', f"{event.id}") # TODO CHANGE
+@bot.on(events.CallbackQuery(pattern=b'select_arabic'))
+async def select_arabic(event):
+    db.insert('language', {'user_id': event.sender_id, 'language': 'ar'})
+    await main_conv(event, 'ar')
+    raise events.StopPropagation
 
-        # Save the media
-        saved_path = await event.download_media(file_path)
-        await event.reply(f"✅ File saved to `{saved_path}`.")
-    except Exception as e:
-        await event.reply(f"⚠️ Failed to save file: {e}")
+async def main_conv(event, lang):
+    async with bot.conversation(event.sender_id) as conv:
+            await conv.send_message(lang.get('enter_company_name', lang))
+            response = await conv.get_response()
+            company_name = response.text
+            await conv.send_message(lang.get('enter_company_country', lang))
+            response = await conv.get_response()
+            company_country = response.text
+            await conv.send_message(lang.get('enter_company_industry', lang))
+            response = await conv.get_response()
+            company_industry = response.text
+            await conv.send_message(lang.get('enter_company_contact', lang))
+            response = await conv.get_response()
+            company_contact = response.text
+            db.insert('company', 
+                      {'name': company_name,
+                       'country': company_country,
+                       'industry': company_industry,
+                       'contact': company_contact})
+            for admin in config.admin_list:
+                await bot.send_message(admin, f'{company_name}\n\n{company_country}\n\n{company_industry}\n\n{company_contact}')
+            await conv.send_message(lang.get('info_sent_successfully', lang))
 
 
 # Connect to Telegram and run in a loop
